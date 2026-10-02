@@ -210,6 +210,23 @@ select {
     width: 100%;
 }
 
+.btn--sm {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 14px;
+}
+
+.btn--invert {
+    background: var(--on-ink);
+    border-color: var(--on-ink);
+    color: var(--ink);
+}
+
+.btn--invert:hover {
+    background: transparent;
+    color: var(--on-ink);
+}
+
 .link-arrow {
     display: inline-flex;
     align-items: center;
@@ -317,10 +334,11 @@ select {
     gap: 16px;
 }
 
-@media (min-width: 901px) {
-    .site-header__actions {
-        display: none;
-    }
+.header-user {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .nav-toggle {
@@ -871,8 +889,75 @@ select {
 
 
 /* =========================
+   АККАУНТЫ
+   ========================= */
+
+.auth {
+    max-width: 480px;
+    margin-inline: auto;
+}
+
+.auth__head {
+    padding-bottom: 24px;
+    margin-bottom: clamp(32px, 4vw, 48px);
+    border-bottom: 1px solid var(--ink);
+}
+
+.auth__switch {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--gray-15);
+    font-size: 15px;
+    color: var(--gray-45);
+}
+
+.auth__switch a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--gray-45);
+    transition: border-color var(--dur) var(--ease);
+}
+
+.auth__switch a:hover {
+    border-bottom-color: var(--ink);
+}
+
+.account-data {
+    margin: 0 0 clamp(32px, 4vw, 48px);
+    border-top: 1px solid var(--gray-15);
+}
+
+.account-data__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-15);
+}
+
+.account-data dt {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gray-45);
+}
+
+.account-data dd {
+    margin: 0;
+    font-size: 15px;
+    text-align: right;
+    word-break: break-word;
+}
+
+.account-logout {
+    display: flex;
+}
+
+
+/* =========================
    ФУТЕР
-========================= */
+   ========================= */
 
 .site-footer {
     overflow: hidden;
@@ -988,7 +1073,8 @@ select {
         --header-h: 72px;
     }
 
-    .site-nav {
+    .site-nav,
+    .site-header__actions .btn {
         display: none;
     }
 

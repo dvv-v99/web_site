@@ -15,6 +15,11 @@
     </nav>
 
     <div class="site-header__actions">
+      {% if user.is_authenticated %}
+        <a class="btn btn--invert btn--sm header-user" href="{% url 'account' %}">{{ user.get_username }}</a>
+      {% else %}
+        <a class="btn btn--invert btn--sm" href="{% url 'login' %}">Войти</a>
+      {% endif %}
       <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-nav">
         <span></span>
         <span></span>
@@ -30,5 +35,10 @@
     <a class="mobile-nav__link" style="--i:1" href="{% url 'projects' %}">Проекты</a>
     <a class="mobile-nav__link" style="--i:2" href="{% url 'news' %}">Новости</a>
     <a class="mobile-nav__link" style="--i:3" href="{% url 'about' %}">О нас</a>
+    {% if user.is_authenticated %}
+      <a class="mobile-nav__link" style="--i:4" href="{% url 'account' %}">{{ user.get_username }}</a>
+    {% else %}
+      <a class="mobile-nav__link" style="--i:4" href="{% url 'login' %}">Войти</a>
+    {% endif %}
   </nav>
 </div>

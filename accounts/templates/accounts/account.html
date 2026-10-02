@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Личный кабинет — DV{% endblock %}
+{% block description %}Личный кабинет DV{% endblock %}
+
+{% block content %}
+
+<section class="container section auth">
+
+  <div class="auth__head">
+    <p class="eyebrow">Аккаунт</p>
+    <h1 class="section__title">{{ user.get_username }}</h1>
+    {% if user.first_name %}
+      <p class="lead">{{ user.first_name }}</p>
+    {% endif %}
+  </div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="note note--success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <dl class="account-data">
+    <div class="account-data__row">
+      <dt>Логин</dt>
+      <dd>{{ user.get_username }}</dd>
+    </div>
+    <div class="account-data__row">
+      <dt>Email</dt>
+      <dd>{{ user.email|default:"—" }}</dd>
+    </div>
+    <div class="account-data__row">
+      <dt>Имя</dt>
+      <dd>{{ user.first_name|default:"—" }}</dd>
+    </div>
+    <div class="account-data__row">
+      <dt>Дата регистрации</dt>
+      <dd>{{ user.date_joined|date:"d.m.Y" }}</dd>
+    </div>
+    <div class="account-data__row">
+      <dt>Последний вход</dt>
+      <dd>{{ user.last_login|date:"d.m.Y H:i"|default:"—" }}</dd>
+    </div>
+  </dl>
+
+  <form class="account-logout" method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button class="btn" type="submit">Выйти</button>
+  </form>
+
+</section>
+
+{% endblock %}

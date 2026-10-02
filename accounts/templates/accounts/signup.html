@@ -1,0 +1,85 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Регистрация — DV{% endblock %}
+{% block description %}Регистрация в личном кабинете DV{% endblock %}
+
+{% block content %}
+
+<section class="container section auth">
+
+  <div class="auth__head">
+    <p class="eyebrow">Аккаунт</p>
+    <h1 class="section__title">Регистрация</h1>
+  </div>
+
+  {% if form.errors %}
+    <div class="note note--error">&larr; Пожалуйста, исправьте ошибки в заполнении формы.</div>
+  {% endif %}
+
+  <div class="form">
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="field">
+        <label for="id_username">Логин *</label>
+        <input type="text" name="username" id="id_username" autofocus
+               value="{{ form.username.value|default:'' }}"
+               placeholder="Придумайте логин" required>
+        {% if form.username.errors %}
+          <div class="field-errors">&larr; {% for error in form.username.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="id_first_name">Имя</label>
+        <input type="text" name="first_name" id="id_first_name"
+               value="{{ form.first_name.value|default:'' }}"
+               placeholder="Как к вам обращаться">
+        {% if form.first_name.errors %}
+          <div class="field-errors">&larr; {% for error in form.first_name.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="id_email">Email *</label>
+        <input type="email" name="email" id="id_email"
+               value="{{ form.email.value|default:'' }}"
+               placeholder="example@mail.com" required>
+        {% if form.email.errors %}
+          <div class="field-errors">&larr; {% for error in form.email.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="id_password1">Пароль *</label>
+        <input type="password" name="password1" id="id_password1"
+               placeholder="Не менее 8 символов" required>
+        {% if form.password1.errors %}
+          <div class="field-errors">&larr; {% for error in form.password1.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="id_password2">Повторите пароль *</label>
+        <input type="password" name="password2" id="id_password2"
+               placeholder="Ещё раз" required>
+        {% if form.password2.errors %}
+          <div class="field-errors">&larr; {% for error in form.password2.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+
+      <button class="btn btn--block" type="submit">Зарегистрироваться</button>
+
+      <p class="form-note">* Поля, отмеченные звёздочкой, обязательны</p>
+    </form>
+
+  </div>
+
+  <p class="auth__switch">
+    Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+  </p>
+
+</section>
+
+{% endblock %}

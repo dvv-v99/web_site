@@ -1,0 +1,64 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Вход — DV{% endblock %}
+{% block description %}Вход в личный кабинет DV{% endblock %}
+
+{% block content %}
+
+<section class="container section auth">
+
+  <div class="auth__head">
+    <p class="eyebrow">Аккаунт</p>
+    <h1 class="section__title">Вход</h1>
+  </div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="note note--success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  {% if form.errors %}
+    <div class="note note--error">&larr; Проверьте логин и пароль.</div>
+  {% endif %}
+
+  <div class="form">
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="field">
+        <label for="id_username">Логин или email *</label>
+        <input type="text" name="username" id="id_username" autofocus
+               value="{{ form.username.value|default:'' }}"
+               placeholder="Логин или email" required>
+        {% if form.username.errors %}
+          <div class="field-errors">&larr; {% for error in form.username.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="id_password">Пароль *</label>
+        <input type="password" name="password" id="id_password"
+               placeholder="Ваш пароль" required>
+        {% if form.password.errors %}
+          <div class="field-errors">&larr; {% for error in form.password.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+
+      {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+      {% endif %}
+
+      <button class="btn btn--block" type="submit">Войти</button>
+    </form>
+
+  </div>
+
+  <p class="auth__switch">
+    Нет аккаунта? <a href="{% url 'signup' %}">Зарегистрироваться</a>
+  </p>
+
+</section>
+
+{% endblock %}

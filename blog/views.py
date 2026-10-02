@@ -17,12 +17,21 @@ from .forms import ContactForm
 
 
 def home(request):
-    slides = CarouselSlide.objects.all()
-    latest_projects = Projects.objects.all().order_by('-date')[:3] 
-    
+    hero_slide = CarouselSlide.objects.all().first()
+    latest_projects = Projects.objects.all().order_by('-date')[:3]
+    latest_posts = Post.objects.all().order_by('-date')[:3]
+    ceo = About.objects.filter(is_ceo=True).first()
+    team_preview = list(About.objects.all().order_by('order')[:3])
+
+    if ceo:
+        team_preview = [p for p in team_preview if p.pk != ceo.pk][:2]
+
     return render(request, 'blog/index.html', {
-        'slides': slides,
+        'hero_slide': hero_slide,
         'latest_projects': latest_projects,
+        'latest_posts': latest_posts,
+        'ceo': ceo,
+        'team_preview': team_preview,
     })
 
 class ProjectsView(View):

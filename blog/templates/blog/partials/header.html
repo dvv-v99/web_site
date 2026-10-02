@@ -1,0 +1,34 @@
+{% load static %}
+
+<header class="site-header">
+  <div class="container site-header__inner">
+
+    <a href="{% url 'home' %}" aria-label="DV — на главную">
+      <img class="site-logo" src="{% static 'logo-mark.png' %}" alt="DV">
+    </a>
+
+    <nav class="site-nav" aria-label="Основная навигация">
+      <a class="site-nav__link {% if request.path == '/' %}is-active{% endif %}" href="{% url 'home' %}">Главная</a>
+      <a class="site-nav__link {% if request.path == '/projects/' %}is-active{% endif %}" href="{% url 'projects' %}">Проекты</a>
+      <a class="site-nav__link {% if request.path == '/news/' %}is-active{% endif %}" href="{% url 'news' %}">Новости</a>
+      <a class="site-nav__link {% if request.path == '/about/' %}is-active{% endif %}" href="{% url 'about' %}">О нас</a>
+    </nav>
+
+    <div class="site-header__actions">
+      <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <nav aria-label="Мобильная навигация">
+    <a class="mobile-nav__link" style="--i:0" href="{% url 'home' %}">Главная</a>
+    <a class="mobile-nav__link" style="--i:1" href="{% url 'projects' %}">Проекты</a>
+    <a class="mobile-nav__link" style="--i:2" href="{% url 'news' %}">Новости</a>
+    <a class="mobile-nav__link" style="--i:3" href="{% url 'about' %}">О нас</a>
+  </nav>
+</div>

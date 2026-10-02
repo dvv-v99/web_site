@@ -1,0 +1,59 @@
+{% load static %}
+
+<footer class="site-footer" id="contact">
+
+  <div class="container">
+
+    <div class="footer-cta">
+      <p class="eyebrow eyebrow--light">Напишите нам</p>
+      <a class="footer-cta__mail" href="mailto:hello@example.com">hello@example.com</a>
+    </div>
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <img class="site-logo" src="{% static 'logo-mark.png' %}" alt="DV">
+        <p class="footer-brand__text">
+          Проектируем и разрабатываем продукты, которые решают задачи бизнеса.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col__title">Навигация</p>
+        <ul>
+          <li><a href="{% url 'home' %}">Главная</a></li>
+          <li><a href="{% url 'projects' %}">Проекты</a></li>
+          <li><a href="{% url 'news' %}">Новости</a></li>
+          <li><a href="{% url 'about' %}">О нас</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col__title">Контакты</p>
+        <ul>
+          <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+          <li><a href="tel:+70000000000">+7 000 000-00-00</a></li>
+          <li><span>Москва</span></li>
+          <li><span>Пн–Пт, 10:00–19:00</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col__title">Соцсети</p>
+        <ul>
+          <li><a href="#" target="_blank" rel="noopener">Telegram ↗</a></li>
+          <li><a href="#" target="_blank" rel="noopener">ВКонтакте ↗</a></li>
+          <li><a href="#" target="_blank" rel="noopener">GitHub ↗</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; {% now "Y" %} DV. Все права защищены.</span>
+      <a href="#top" data-scroll-top>Наверх &uarr;</a>
+    </div>
+
+  </div>
+
+</footer>

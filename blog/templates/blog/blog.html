@@ -1,0 +1,514 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Новости — Мой сайт</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #222;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #000;
+            padding: 15px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+
+            margin: 0 25px;
+
+            font-weight: bold;
+            font-size: 18px;
+
+            transition: opacity 0.2s ease;
+        }
+
+        header nav a:hover {
+            opacity: 0.7;
+        }
+
+        .logo {
+            height: 90px;
+            width: auto;
+        }
+
+
+        /* =========================
+           NEWS HEADER
+        ========================= */
+
+        .news-header {
+            text-align: center;
+            padding: 70px 20px 40px;
+        }
+
+        .news-header h1 {
+            font-size: 46px;
+            font-weight: 700;
+            margin: 0 0 15px;
+        }
+
+        .news-header p {
+            color: #666;
+            font-size: 19px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           NEWS CONTAINER
+        ========================= */
+
+        .news-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px 90px;
+        }
+
+
+        /* =========================
+           NEWS GRID
+        ========================= */
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+
+        /* =========================
+           NEWS CARD
+        ========================= */
+
+        .news-card {
+            display: block;
+
+            background: #fff;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.14);
+        }
+
+
+        /* =========================
+           NEWS IMAGE
+        ========================= */
+
+        .news-image {
+            width: 100%;
+            height: 280px;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .news-placeholder {
+            width: 100%;
+            height: 280px;
+
+            background: #eeeeee;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #999;
+
+            font-size: 17px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           NEWS CONTENT
+        ========================= */
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-date {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        .news-content h2 {
+            font-size: 26px;
+            font-weight: 700;
+
+            margin: 0 0 12px;
+
+            line-height: 1.3;
+        }
+
+        .news-description {
+            color: #666;
+
+            font-size: 16px;
+
+            line-height: 1.6;
+
+            margin: 0 0 20px;
+
+            /* Ограничение описания тремя строками */
+            display: block;
+
+            line-clamp: 3;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           AUTHOR
+        ========================= */
+
+        .news-author {
+            color: #555;
+
+            font-size: 14px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           READ MORE
+        ========================= */
+
+        .read-more {
+            display: inline-block;
+
+            color: #000;
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            transition: transform 0.2s ease;
+        }
+
+        .news-card:hover .read-more {
+            transform: translateX(5px);
+        }
+
+
+        /* =========================
+           EMPTY NEWS
+        ========================= */
+
+        .empty-news {
+            text-align: center;
+
+            padding: 70px 20px;
+
+            background: #fff;
+
+            border-radius: 16px;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .empty-news h2 {
+            margin-bottom: 12px;
+        }
+
+        .empty-news p {
+            color: #777;
+
+            margin: 0;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #333;
+
+            color: #fff;
+
+            text-align: center;
+
+            padding: 25px;
+
+            font-size: 16px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+
+        /* =========================
+           ADAPTIVE
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            header {
+                flex-direction: column;
+
+                gap: 15px;
+
+                padding: 15px;
+            }
+
+            header nav {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 5px;
+            }
+
+            header nav a {
+                margin: 5px 10px;
+
+                font-size: 16px;
+            }
+
+            .logo {
+                height: 70px;
+            }
+
+            .news-header {
+                padding: 50px 20px 30px;
+            }
+
+            .news-header h1 {
+                font-size: 36px;
+            }
+
+            .news-header p {
+                font-size: 17px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .news-image,
+            .news-placeholder {
+                height: 230px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <a href="/">
+        <img
+            src="{% static 'logo black.png' %}"
+            alt="Логотип сайта"
+            class="logo"
+        >
+    </a>
+
+    <nav>
+
+        <a href="/">Главная</a>
+
+        <a href="/projects/">Проекты</a>
+
+        <a href="/news/">Новости</a>
+
+        <a href="/about/">О нас</a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+    <section class="news-header">
+
+        <h1>Новости</h1>
+
+        <p>
+            Последние события, новости и обновления нашей компании
+        </p>
+
+    </section>
+
+
+    <section class="news-container">
+
+        {% if post_list %}
+
+            <div class="news-grid">
+
+                {% for post in post_list %}
+
+                    <a
+                        href="#"
+                        class="news-card"
+                    >
+
+                        {% if post.image %}
+
+                            <img
+                                src="{{ post.image.url }}"
+                                alt="{{ post.title }}"
+                                class="news-image"
+                            >
+
+                        {% else %}
+
+                            <div class="news-placeholder">
+                                Нет изображения
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="news-content">
+
+                            <div class="news-date">
+                                {{ post.date|date:"d.m.Y" }}
+                            </div>
+
+                            <h2>
+                                {{ post.title }}
+                            </h2>
+
+                            <p class="news-description">
+                                {{ post.description }}
+                            </p>
+
+                            <span class="read-more">
+                                Читать новость →
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-news">
+
+                <h2>
+                    Новостей пока нет
+                </h2>
+
+                <p>
+                    Здесь появятся последние новости нашей компании.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2025 Мой сайт
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
